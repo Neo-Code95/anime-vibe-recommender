@@ -1,0 +1,121 @@
+<img src="/styles/media/dandadan.png" alt="Dandadan image by Naito" class="img-fluid mb-4" style="max-width: 600px; display: block; margin: 0 auto;">
+<p class="text-center text-muted small mb-4">Image by <a href="https://wall.alphacoders.com/big.php?i=1383040" target="_blank" rel="noopener noreferrer">Naito</a></p>
+
+<!--Source: https://wall.alphacoders.com/big.php?i=1383040-->
+
+<h2 class="display-4 fw-bold text-body-emphasis text-center">Find Anime that Vibe-Match Your Favourite</h2>
+<p class="lead mb-4 text-center">Discover anime series that feel like your favorite: similar tone, themes, and narrative style.</p>
+
+
+
+<form id="search-form" action="/recommend" method="POST" class="col-md-8 mx-auto">
+   
+    <label class="form-label visually-hidden">Anime Name</label>
+
+    <div class="input-group mb-4">
+      <input name="title" class="form-control" placeholder="Attack on Titan..." required/>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="form-text text-center">Enter your favourite anime's name.</div>
+    
+</form>
+
+<% if (favourite || vibe_profile || (recs && recs.length)) { %>
+
+    <hr class="my-4" />
+
+    <h2 class="text-center mb-4">You have chosen:</h2>
+    <!--Favourite-->
+    <section class="my-4 favourite-anime-card d-flex align-items-center justify-content-center gap-4">
+        <% if (favourite) { %>
+            <div class="anime-image-container">
+                <% if (favourite.image) { %>
+                    <img src="<%= favourite.image %>" alt="<%= favourite.title %> cover" class="img-fluid rounded" style="max-width: 200px; height: auto;">
+                <% } else { %>
+                    <div class="placeholder-img">No Image</div>
+                <% } %>
+            </div>
+            <div class="anime-details">
+                <h4><%= favourite.title %></h4>
+                <div class="text-muted">
+                    Rating: <%= favourite.score ?? "N/A" %><br>
+                    Episode: <%= favourite.episodes ?? "N/A" %>
+                </div>
+            </div>
+        <% } else { %>
+            <p class="text-center">No info found for your pick.</p>
+        <% } %>
+
+    </section>
+
+    <!--Vibe Profile-->
+    <section class="my-4 text-center">
+        <h3 class="mb-3">Vibe Profile</h3>
+        <% if (!vibe_profile) { %>
+            <p>No vibe profile available.</p>
+        <% } else { %>
+            <div class="vibe-box p-3 text-start mx-auto" style="max-width: 800px;">
+                <p><strong>Genre:</strong> <%= (vibe_profile.genre || []).join(', ') %></p>
+                <p><strong>Tone/Mood:</strong> <%= (vibe_profile.tone_mood || []).join(",") %></p>
+                <p><strong>Narrative:</strong> <%= (vibe_profile.narrative_style || []).join(",") %></p>
+                <p><strong>Themes:</strong> <%= (vibe_profile.themes || []).join(",") %></p>
+                <p><strong>Character dynamics:</strong> <%= (vibe_profile.character_dynamics || []).join(",") %></p>
+                <p><strong>Art aesthetic:</strong> <%= (vibe_profile.art_aesthetic || []).join(",") %></p>
+                <p><strong>Ending emotional payoff:</strong> <%= (vibe_profile.ending_emotional_payoff || []).join(",") %></p>
+            </div>
+        <% } %>
+    </section>
+
+    <!--Recommendations-->
+    <section class="my-5">
+        <div class="container px-4 py-5" id="featured-3">
+            <h2 class="pb-2 border-bottom text-center">We recommend:</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 justify-content-center">
+                <% (recs || []).forEach(r => {
+                    %>
+                    <div class="col-12 col-md-4 d-flex justify-content-center">
+                        <div class="card h-100" style="width: 18rem;">
+                            <% if (r.jikan?.image) { %>
+                                <img src="<%= r.jikan.image %>" class="card-img-top" alt="<%= r.jikan.title || r.title %> cover">
+                            <% } else { %>
+                                <div class="placeholder-img card-img-top">No Image</div>
+                            <% } %>
+                        
+                            <div class="card-body">
+                                <h4 class="card-title text-center"><%= r.jikan?.title || r.title  %></h4>
+                                <% if (r.jikan) { %>
+                                    <div class="small text-muted mb-2 text-center">
+                                        Score: <%= r.jikan.score ?? "N/A" %><br>
+                                        Episodes: <%= r.jikan.episodes ?? "N/A" %>
+                                    </div>
+                                <% } %>
+
+                                <p class="card-text text-center"><%= r.jikan?.reason || r.reason %></p>
+
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+<% } %>
+
+<script>
+    const form = document.getElementById('search-form');
+    if (form) {
+      form.addEventListener('submit', () => {
+        document.getElementById('loading')?.classList.remove('d-none');
+      });
+    }
+</script>
+  
+
+
+
+
+
+
+
+
+

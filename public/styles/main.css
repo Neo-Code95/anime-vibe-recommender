@@ -1,0 +1,76 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+    max-width: 960px; /* Adjust as needed for your desired width */
+    margin: 0 auto; /* This centers the block-level element */
+    display: flex; /* Make main a flex container */
+    flex-direction: column; /* Stack its children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-overlay .loading-card {
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.vibe-box {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fafafa;
+}
+
+.placeholder-img {
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 12px;
+    color: #888;
+}
+
+.favourite-anime-card img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.card-img-top {
+    height: 300px; /* Adjust as needed */
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.card-body .card-title {
+    min-height: 3em; /* Ensure titles have consistent height */
+}
+
+.card-body .card-text {
+    font-size: 0.9em;
+    color: #555;
+}
+  
+
+  
