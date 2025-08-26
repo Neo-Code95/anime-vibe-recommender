@@ -33,6 +33,10 @@ app.get("/", (req, res) => {
     });
 });
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 app.post("/recommend", async (req, res, next) => {
     try {
         const favTitle = (req.body.title || "").trim();
@@ -53,6 +57,7 @@ app.post("/recommend", async (req, res, next) => {
 
         //2. Enrich with Jikan API
         const favourite = await searchAnimeByTitle(favTitle);
+        await delay(1000)
         const recs = await Promise.all(
             rawRecs.map(async r => {
                 const jikanData = await searchAnimeByTitle(r.title);
