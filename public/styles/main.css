@@ -71,6 +71,13 @@ main {
     font-size: 0.9em;
     color: #555;
 }
+
+.img-fluid {
+    max-width: 600px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
   
 
   
